@@ -104,7 +104,7 @@ server {
     # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
     #
     location ~ \.php$ {
-        try_files $uri =404;
+        try_files \$uri =404;
         fastcgi_pass   $php_name_random:$php_port;
         fastcgi_index  index.php;
         fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
