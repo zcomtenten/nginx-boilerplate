@@ -66,6 +66,8 @@ services:
     volumes:
       - "./nginx.conf:/etc/nginx/nginx.conf:ro"
       - "./html:/usr/share/nginx/html:ro"
+    depends_on:
+      - $php_name_random
 
 EOF
 
@@ -165,9 +167,9 @@ function start_docker_php() {
 
 nginx_port_checker
 nginx_docker_name_random
+php_docker_name_random
 creat_nginx_docker_file
 php_port_checker
-php_docker_name_random
 creat_php_fpm_docker_file
 creat_php_config
 start_docker_php
