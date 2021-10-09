@@ -54,7 +54,7 @@ EOF
 }
 
 function start_docker() {
-    docker_compose -f $db_creat/docker-compser-$db_creat.yaml up -d
+    docker-compose -f $db_creat/docker-compser-$db_creat.yaml up -d
 }
 
 
