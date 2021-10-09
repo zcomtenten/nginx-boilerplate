@@ -165,10 +165,10 @@ function start_docker_php() {
 }
 
 nginx_port_checker
+nginx_docker_name_random
 creat_nginx_docker_file
 php_port_checker
 php_docker_name_random
-nginx_docker_name_random
 creat_php_fpm_docker_file
 creat_php_config
 # start_docker_php
