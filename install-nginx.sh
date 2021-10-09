@@ -1,21 +1,4 @@
 #!/bin/bash
-option="${1}"
-
-case ${option} in
--v)
-    if [[ ${2} != @(7.3|7.4|8.0|) ]]; then
-        echo "only input 7.3 7.4 8.0"
-        exit 1 # Command to come out of the program with status 1
-    fi
-    php_version="${2}-fpm"
-    ;;
-*)
-    echo "input -v to version php"
-    exit 1 # Command to come out of the program with status 1
-    ;;
-esac
-
-
 
 function nginx_port_checker() {
     while :; do
