@@ -7,7 +7,7 @@ case ${option} in
         echo "only input 7.3 7.4 8.0"
         exit 1 # Command to come out of the program with status 1
     fi
-    php_version="${2}"
+    php_version="${2}-fpm"
     ;;
 *)
     echo "input -v to version php"
@@ -135,7 +135,7 @@ version: '2'
 services:
   $php_name_random:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: docker.io/bitnami/php-fpm:$php_version
+    image: php:$php_version
     ports:
       - $php_port:9000
 
