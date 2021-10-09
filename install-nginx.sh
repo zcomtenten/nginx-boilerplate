@@ -17,7 +17,7 @@ function nginx_port_checker() {
 function nginx_docker_name_random() {
     while :; do
         nginx_creat_name=$(openssl rand -hex 8)
-        nginx_creat_name_check=$(find ./ -type f -name "*.yaml" -exec grep '$db_creat' {} \;)
+        nginx_creat_name_check=$(find ./ -name "$nginx_creat_name")
         if [ -z "$nginx_creat_name_check" ]; then
             break
         fi
@@ -27,7 +27,7 @@ function nginx_docker_name_random() {
 
 function creat_nginx_docker_file() {
     cp -r core $nginx_creat_name 
-    cat > $nginx_creat_name/docker-compser-nginx.yaml <<EOF
+    cat > $nginx_creat_name/docker-compser.yaml <<EOF
 version: '3'
 services:
   web:
