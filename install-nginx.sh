@@ -68,6 +68,7 @@ services:
       - "./html:/usr/share/nginx/html:ro"
     depends_on:
       - $php_name_random
+
   $php_name_random:
     tty: true # Enables debugging capabilities when attached to this container.
     image: php:$php_version
