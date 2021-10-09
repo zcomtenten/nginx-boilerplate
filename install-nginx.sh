@@ -175,8 +175,8 @@ nginx_port_checker
 php_port_checker
 nginx_docker_name_random
 php_docker_name_random
-creat_php_fpm_docker_file
-creat_php_config
 creat_nginx_docker_file
+creat_php_config
+creat_php_fpm_docker_file
 # start_docker_php
 start_docker_nginx
