@@ -1,7 +1,7 @@
 #!/bin/bash
 function port_checker() {
     while :; do
-        port=$(shuf -i 45000-50000 -n 1)
+        port=$(shuf -i 2000-4000 -n 1)
         port_checking=$(netstat -nplt | grep $port)
         port_checkingv2=$(find ./ -type f -name "*.yaml" -exec grep '$port' {} \;)
         if [ -z "$port_checking" ]; then
