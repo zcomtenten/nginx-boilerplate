@@ -1,2 +1,2 @@
 FROM php:7-fpm
-COPY ./html /usr/share/nginx/html
+COPY ./html /var/www/html

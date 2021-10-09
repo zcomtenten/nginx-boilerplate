@@ -38,7 +38,7 @@ services:
           - "$port:80"
       volumes:
         - ./nginx.conf:/etc/nginx/nginx.conf
-        - ./html:/usr/share/nginx/html
+        - ./html:/var/www/html
       depends_on:
           - php
   php:
@@ -46,7 +46,7 @@ services:
         context: .
         dockerfile: ./containers/php/Dockerfile
       volumes:
-        - /html:/usr/share/nginx/html
+        - /html:/var/www/html
 EOF
 
 }
