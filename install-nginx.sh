@@ -82,7 +82,7 @@ server {
 
     location / {
         root   /usr/share/nginx/html;
-        index  index.html index.htm;
+        index  index.php;
     }
 
     #error_page  404              /404.html;
@@ -171,5 +171,5 @@ php_port_checker
 php_docker_name_random
 creat_php_fpm_docker_file
 creat_php_config
-# start_docker_php
-# start_docker_nginx
+start_docker_php
+start_docker_nginx
