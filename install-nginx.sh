@@ -35,7 +35,7 @@ services:
         context: .
         dockerfile: ./containers/nginx/Dockerfile
       ports:
-          - "8080:80"
+          - "$port:80"
       volumes:
         - ./nginx.conf:/etc/nginx/nginx.conf
         - ./html:/usr/share/nginx/html
