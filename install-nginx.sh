@@ -64,16 +64,17 @@ services:
     ports:
     - "$port:80"
     volumes:
-      - "./nginx.conf:/etc/nginx/nginx.conf:ro"
-      - "./html:/usr/share/nginx/html:ro"
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./html:/usr/share/nginx/html
     depends_on:
       - $php_name_random
 
   $php_name_random:
-    tty: true # Enables debugging capabilities when attached to this container.
-    image: php:$php_version
-    ports:
-      - $php_port:9000
+    build:
+        context: .
+        dockerfile: ./containers/php/Dockerfile
+    volumes:
+        - ./html:/usr/share/nginx/html
 
 EOF
 
