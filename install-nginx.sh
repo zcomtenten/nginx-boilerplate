@@ -130,7 +130,7 @@ function php_port_checker() {
 }
 
 function creat_php_fpm_docker_file() {
-    cat > $nginx_creat_name/docker-compser-php.yaml <<EOF
+    cat > $nginx_creat_name/php/docker-compser-php.yaml <<EOF
 version: '2'
 services:
   $php_name_random:
@@ -160,7 +160,7 @@ function start_docker_nginx() {
 }
 
 function start_docker_php() {
-    docker-compose -f $nginx_creat_name/docker-compser-php.yaml up -d
+    docker-compose -f $nginx_creat_name/php/docker-compser-php.yaml up -d
 }
 
 nginx_port_checker
