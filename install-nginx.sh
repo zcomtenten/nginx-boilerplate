@@ -138,8 +138,7 @@ services:
     image: docker.io/bitnami/php-fpm:$php_version
     ports:
       - $php_port:9000
-    volumes:
-      - ./$php_version/$nginx_creat_name:/app
+
 EOF
 
 }
