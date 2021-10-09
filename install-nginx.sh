@@ -97,7 +97,7 @@ server {
     #
     location ~ \.php$ {
         root           html;
-        fastcgi_pass   127.0.0.1:$php_port;
+        fastcgi_pass   php-$php_name_random-1:$php_port;
         fastcgi_index  index.php;
         fastcgi_param  SCRIPT_FILENAME  /scripts\$fastcgi_script_name;
         include        fastcgi_params;
