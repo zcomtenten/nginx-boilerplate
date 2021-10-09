@@ -27,7 +27,7 @@ function php_docker_name_random() {
 
 }
 
-function port_checker() {
+function php_port_checker() {
     while :; do
         port=$(shuf -i 40000-45000 -n 1)
         port_checking=$(netstat -nplt | grep $port)
@@ -43,7 +43,7 @@ function port_checker() {
 
 function creat_php_fpm_docker_file() {
 
-    cat >docker-compser-$db_creat.yaml <<EOF
+    cat > $db_creat/docker-compser-php.yaml <<EOF
 version: '2'
 services:
   $db_creat:
@@ -57,11 +57,11 @@ EOF
 
 }
 function start_docker() {
-    docker_compose -f docker-compser-$db_creat.yaml up -d
+    docker-compose -f docker-compser-$db_creat.yaml up -d
 }
 
 php_docker_name_random
-port_checker
+php_port_checker
 creat_php_fpm_docker_file
 start_docker
 
