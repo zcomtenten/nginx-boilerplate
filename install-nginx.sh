@@ -134,7 +134,7 @@ function creat_php_fpm_docker_file() {
     cat > $nginx_creat_name/docker-compser-php.yaml <<EOF
 version: '2'
 services:
-  $nginx_creat_name:
+  $php_name_random:
     tty: true # Enables debugging capabilities when attached to this container.
     image: docker.io/bitnami/php-fpm:$php_version
     ports:
@@ -145,6 +145,16 @@ EOF
 
 }
 
+function php_docker_name_random() {
+    while :; do
+        php_name_random=$(openssl rand -hex 8)
+        php_name_random_checker=$(find ./ -type f -name "*.yaml" -exec grep '$php_name_random' {} \;)
+        if [ -z "$php_name_random_checker" ]; then
+            break
+        fi
+    done
+
+}
 
 
 function start_docker_nginx() {
