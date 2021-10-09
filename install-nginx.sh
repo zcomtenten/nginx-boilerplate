@@ -139,7 +139,7 @@ function php_docker_name_random() {
 
 
 function start_docker_nginx() {
-    docker-compose -f $nginx_creat_name/docker-compser-nginx.yaml up -d
+    docker-compose -f $nginx_creat_name/docker-compser-nginx.yaml up
 }
 
 function start_docker_php() {
