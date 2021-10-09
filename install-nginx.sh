@@ -103,12 +103,15 @@ server {
     }
     # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
     #
-    location ~ \.php$ {
-        try_files \$uri =404;
+    location ~ [^/]\.php(/|$) {
+        fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+        if (!-f \$document_root\$fastcgi_script_name) {
+            return 404;
+        }
+        fastcgi_param HTTP_PROXY "";
         fastcgi_pass   $php_name_random:$php_port;
-        fastcgi_index  index.php;
-        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-        include        fastcgi_params;
+        fastcgi_index index.php;
+        include fastcgi_params;
     }
 
     # deny access to .htaccess files, if Apache's document root
