@@ -54,45 +54,24 @@ EOF
 function creat_php_config() {
     cat > $nginx_creat_name/default.conf <<EOF
 server {
-    listen       80;
-    listen  [::]:80;
-    server_name  localhost;
-
-    #access_log  /var/log/nginx/host.access.log  main;
+    index index.php index.html;
+    server_name localhost;
+    root /usr/share/nginx/html;
 
     location / {
-        root   /usr/share/nginx/html;
-        index  index.php;
+        try_files \$uri \$uri/ /index.php\$is_args$args;
     }
 
-    #error_page  404              /404.html;
-
-    # redirect server error pages to the static page /50x.html
-    #
-    error_page   500 502 503 504  /50x.html;
-    location = /50x.html {
-        root   /usr/share/nginx/html;
-    }
-    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-    #
-    location ~ [^/]\.php(/|$) {
-        fastcgi_split_path_info ^(.+?\.php)(/.*)$;
-        if (!-f \$document_root\$fastcgi_script_name) {
-            return 404;
-        }
-        fastcgi_param HTTP_PROXY "";
-        fastcgi_pass   $php_name_random:$php_port;
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass php:9000;
         fastcgi_index index.php;
         include fastcgi_params;
-    }
-
-    # deny access to .htaccess files, if Apache's document root
-    # concurs with nginx's one
-    #
-    location ~ /\.ht {
-        deny  all;
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+        fastcgi_param PATH_INFO \$fastcgi_path_info;
     }
 }
+
 
 EOF
 
