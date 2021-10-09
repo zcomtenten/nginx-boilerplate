@@ -72,7 +72,6 @@ EOF
 }
 
 function creat_php_config() {
-    cp -r core $nginx_creat_name 
     cat > $nginx_creat_name/default.conf <<EOF
 server {
     listen       80;
