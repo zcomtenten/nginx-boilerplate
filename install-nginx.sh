@@ -28,37 +28,25 @@ function nginx_docker_name_random() {
 function creat_nginx_docker_file() {
     cp -r core $nginx_creat_name 
     cat > $nginx_creat_name/docker-compser-nginx.yaml <<EOF
-# This docker-compose.yml file is used to set up your project in the local
-# development environment *only*. It is *not* used in deployment to our cloud
-# servers, and has no effect whatsoever in cloud deployments.
-#
-# See our Developer Handbook for more information:
-# http://docs.divio.com/en/latest/reference/docker-docker-compose.html
-version: "2"
-
+version: '3'
 services:
-  # The web container is an instance of exactly the same Docker image as your
-  # Cloud application container.
   web:
-    build: .
-    # Change the port if you'd like to expose your project locally on a
-    # different port, for example if you already use port 8000 for
-    # something else.
-    ports:
-    - "$port:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./html:/usr/share/nginx/html
-    depends_on:
-      - $php_name_random
-
-  $php_name_random:
-    build:
+      build:
+        context: .
+        dockerfile: ./containers/nginx/Dockerfile
+      ports:
+          - "8080:80"
+      volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf
+        - ./html:/usr/share/nginx/html
+      depends_on:
+          - php
+  php:
+      build:
         context: .
         dockerfile: ./containers/php/Dockerfile
-    volumes:
-        - ./html:/usr/share/nginx/html
-
+      volumes:
+        - /html:/usr/share/nginx/html
 EOF
 
 }
